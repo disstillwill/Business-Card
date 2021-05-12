@@ -1,6 +1,11 @@
 % Use the article class
 \documentclass[12pt,oneside,final]{article}
 
+% Update font and encoding
+\usepackage[T1]{fontenc}
+\usepackage{anyfontsize}
+\usepackage{lmodern}
+
 % A standard business card is 3.5 x 2 inches
 % We also remove the header, footer, and all margins
 \usepackage[paperwidth=3.5in,paperheight=2in,margin=0cm,noheadfoot]{geometry}
@@ -44,7 +49,7 @@ END:VCARD}};
 
 % LATEX LOGO
 \draw (current page.center) ++(-\paperheight/2+\edgemargin+\paperwidth/2+\edgemargin-\qrheight/2,0) node (helper logo) {};
-\node[anchor=center,rotate around={90:(current page.center)}, yshift=-\paperheight/2] at (current page.center) {Made with \LaTeX};
+\node[anchor=center,rotate around={90:(current page.center)}, yshift=-\paperheight/2] at (current page.center) {\small{Made with \LaTeX}};
 
 \end{tikzpicture}
 
