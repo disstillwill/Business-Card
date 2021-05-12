@@ -1,0 +1,53 @@
+% Use the article class
+\documentclass[12pt,oneside,final]{article}
+
+% A standard business card is 3.5 x 2 inches
+% We also remove the header, footer, and all margins
+\usepackage[paperwidth=3.5in,paperheight=2in,margin=0cm,noheadfoot]{geometry}
+
+\setlength{\baselineskip}{0cm}						% Set the default baseline size
+\setlength{\topskip}{0pt}							% Set the distance between headers and text
+\usepackage{parskip}							% Remove paragraph indents
+\usepackage{tikz}								% Handle actual layout
+\usetikzlibrary{calc,positioning}						% Load and configure TikZ libraries
+\usepackage[nolinks]{qrcode}						% Create QR codes
+
+% Define lengths for internal spacing
+\newlength{\qrheight}  \setlength{\qrheight}{1in}	
+\newlength{\edgemargin} \setlength{\edgemargin}{0.2in}
+
+\begin{document}
+\thispagestyle{empty}
+
+\vspace*{\fill}		% Vertically align the document (repeated below)
+
+% Layout definition
+\begin{tikzpicture}[remember picture,overlay,inner sep=0pt]
+
+% QR CODE
+\draw (current page.center) ++(-\paperheight/2-\edgemargin+\paperwidth/2-\edgemargin-\qrheight/2,0) node (helper qr) {};
+\node[anchor=east] at (helper qr) {
+\qrcode[level=L,height=\qrheight]{BEGIN:VCARD
+VERSION:3.0
+N:John;Doe;;Mr.
+FN:Mr. John Doe
+TITLE:CEO Doe Enterprises
+ORG:Doe Enterprises
+PHOTO;VALUE=URI;TYPE=JPEG:https://johndoe.com/path/to/jpeg/images.jpeg
+TEL;TYPE=MOBILE:+1 781 555 1212
+EMAIL:me@johndoe.com
+URL:https://johndoe.com
+REV:2017-29-01T13:52:43Z
+BDAY:19880310
+ADR;TYPE=WORK,PREF:;;2 Some Avenue;Anytown;SF;11111;USA
+END:VCARD}};
+
+% LATEX LOGO
+\draw (current page.center) ++(-\paperheight/2+\edgemargin+\paperwidth/2+\edgemargin-\qrheight/2,0) node (helper logo) {};
+\node[anchor=center,rotate around={90:(current page.center)}, yshift=-\paperheight/2] at (current page.center) {Made with \LaTeX};
+
+\end{tikzpicture}
+
+\vspace*{\fill}
+
+\end{document}

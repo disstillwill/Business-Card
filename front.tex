@@ -1,0 +1,64 @@
+% Allow arbitrary sizes for Computer Modern
+\RequirePackage{fix-cm}
+
+% Use the article class
+\documentclass[12pt,oneside,final]{article}
+
+% A standard business card is 3.5 x 2 inches
+% We also remove the header, footer, and all margins
+\usepackage[paperwidth=3.5in,paperheight=2in,margin=0cm,noheadfoot]{geometry}
+
+\setlength{\baselineskip}{0cm}					% Set the default baseline size
+\setlength{\topskip}{0pt}						% Set the distance between headers and text
+\usepackage{parskip}						% Remove paragraph indents
+\usepackage{tikz}							% Handle actual layout
+\usetikzlibrary{matrix,calc,positioning}			% Load and configure TikZ libraries
+\usepackage{setspace}						% Change line spacing
+
+% Define lengths for internal spacing
+\newlength{\seplinewidth}		\setlength{\seplinewidth}{2.5cm}
+\newlength{\seplineheight}		\setlength{\seplineheight}{1pt}
+\newlength{\seplinedistance}	\setlength{\seplinedistance}{0.3cm}
+
+% Define font size for initial
+\newcommand\YUGE{\fontsize{36}{44}\selectfont}
+
+\begin{document}
+\thispagestyle{empty}
+
+\vspace*{\fill}		% Vertically align the document (repeated below)
+\begin{center}		% Center the document
+
+% Layout definition
+\begin{tikzpicture}
+
+% INITIAL
+\matrix[anchor=center] (initial) {
+\node{\YUGE{J}}; \\
+};
+
+% SEPARATOR
+\node[right=\seplinedistance of initial] (helper) {};
+\draw[line width=\seplineheight] (helper)++(0,-\seplinewidth/2) -- ++(0,\seplinewidth);
+
+% INFORMATION
+\matrix[right=\seplinedistance of helper,anchor=west] (info) {
+% Name and title
+\setstretch{0.8}
+\node[align=left]{
+\large{John Doe} \\
+\scriptsize\emph{Official Title}}; \\
+% Contact information
+\setstretch{0.75}
+\node[align=left]{
+\scriptsize\texttt{johndoe.com} \\
+\scriptsize\texttt{me@johndoe.com} \\
+\scriptsize\texttt{+1 781 555 1212}}; \\
+};
+
+\end{tikzpicture}
+
+\end{center}
+\vspace*{\fill}
+
+\end{document}
