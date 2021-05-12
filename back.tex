@@ -16,6 +16,7 @@
 \usepackage{tikz}								% Handle actual layout
 \usetikzlibrary{calc,positioning}						% Load and configure TikZ libraries
 \usepackage[nolinks]{qrcode}						% Create QR codes
+\usepackage{setspace}							% Change line spacing
 
 % Define lengths for internal spacing
 \newlength{\qrheight}  \setlength{\qrheight}{1in}	
@@ -47,9 +48,12 @@ BDAY:19880310
 ADR;TYPE=WORK,PREF:;;2 Some Avenue;Anytown;SF;11111;USA
 END:VCARD}};
 
-% LATEX LOGO
+% DETAILS
+\setstretch{0.9}
 \draw (current page.center) ++(-\paperheight/2+\edgemargin+\paperwidth/2+\edgemargin-\qrheight/2,0) node (helper logo) {};
-\node[anchor=center,rotate around={90:(current page.center)}, yshift=-\paperheight/2] at (current page.center) {\small{Made with \LaTeX}};
+\node[align=center,anchor=center,rotate around={90:(current page.center)}, yshift=-\paperheight/2] at (current page.center) {
+\footnotesize{Made with \LaTeX} \\
+\scriptsize\texttt{github.com/jdcodes}};
 
 \end{tikzpicture}
 
